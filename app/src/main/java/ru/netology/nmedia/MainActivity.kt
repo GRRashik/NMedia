@@ -20,72 +20,24 @@ class MainActivity : AppCompatActivity() {
             likedByMe = false
         )
 
-        fun likesCountFormate(int: Int): String {
-            var format = post.likes
-            if (post.likes > 999 && post.likes < 1100) {
-                format = post.likes / 1000
+        fun countFormate(i : Int): String {
+            var format = i
+            if (i > 999 && i < 1100) {
+                format = i / 1000
                 return format.toString() + "K"
             }
-            if (post.likes >= 1100 && post.likes < 10000) {
-                format = post.likes / 1000
-                var add = (post.likes - format * 1000) / 100
+            if (i >= 1100 && i < 10000) {
+                format = i / 1000
+                var add = (i - format * 1000) / 100
                 return format.toString() + ",$add K"
             }
-            if (post.likes > 9999 && post.likes < 1000000) {
-                format = post.likes / 1000
+            if (i > 9999 && i < 1000000) {
+                format = i / 1000
                 return format.toString() + "K"
             }
-            if (post.likes > 999999) {
-                format = post.likes / 1000000
-                var add = (post.likes - format * 1000000) / 100000
-                return format.toString() + ",$add M"
-            } else {
-                return format.toString()
-            }
-        }
-
-        fun shareCountFormate(int: Int): String {
-            var format = post.share
-            if (post.share > 999 && post.share < 1100) {
-                format = post.share / 1000
-                return format.toString() + "K"
-            }
-            if (post.share >= 1100 && post.share < 10000) {
-                format = post.share / 1000
-                var add = (post.share - format * 1000) / 100
-                return format.toString() + ",$add K"
-            }
-            if (post.share > 9999 && post.share < 1000000) {
-                format = post.share / 1000
-                return format.toString() + "K"
-            }
-            if (post.share > 999999) {
-                format = post.share / 1000000
-                var add = (post.share - format * 1000000) / 100000
-                return format.toString() + ",$add M"
-            } else {
-                return format.toString()
-            }
-        }
-
-        fun viewsCountFormate(int: Int): String {
-            var format = post.views
-            if (post.views > 999 && post.views < 1100) {
-                format = post.views / 1000
-                return format.toString() + "K"
-            }
-            if (post.views >= 1100 && post.views < 10000) {
-                format = post.views / 1000
-                var add = (post.views - format * 1000) / 100
-                return format.toString() + ",$add K"
-            }
-            if (post.views > 9999 && post.views < 1000000) {
-                format = post.views / 1000
-                return format.toString() + "K"
-            }
-            if (post.views > 999999) {
-                format = post.views / 1000000
-                var add = (post.views - format * 1000000) / 100000
+            if (i > 999999) {
+                format = i / 1000000
+                var add = (i - format * 1000000) / 100000
                 return format.toString() + ",$add M"
             } else {
                 return format.toString()
@@ -100,13 +52,13 @@ class MainActivity : AppCompatActivity() {
             }
 
 
-            likeCount?.text = likesCountFormate(post.likes)
+            likeCount?.text = countFormate(post.likes)
 
             root.setOnClickListener {
                 Log.d("stuff", "stuff")
             }
 
-            avatar.setOnClickListener {
+                avatar.setOnClickListener {
                 Log.d("stuff", "avatar")
             }
 
@@ -114,23 +66,24 @@ class MainActivity : AppCompatActivity() {
                 Log.d("stuff", "like")
                 post.likedByMe = !post.likedByMe
                 like.setImageResource(
-                    if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_like_24
+                    if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_liked_24
                 )
                 if (post.likedByMe) post.likes++ else post.likes--
-                likeCount?.text = likesCountFormate(post.likes)
+                likeCount?.text = countFormate(post.likes)
 
             }
 
-            shareCount?.text = shareCountFormate(post.share)
+            shareCount?.text = countFormate(post.share)
 
             share?.setOnClickListener {
                 Log.d("stuff", "share")
                 post.share++
-                shareCount?.text = shareCountFormate(post.share)
+                shareCount?.text = countFormate(post.share)
             }
 
-            viewsCount?.text = viewsCountFormate(post.views)
+            viewsCount?.text = countFormate(post.views)
         }
     }
 }
+
 
